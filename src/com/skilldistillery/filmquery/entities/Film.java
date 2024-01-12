@@ -1,7 +1,5 @@
 package com.skilldistillery.filmquery.entities;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class Film {
@@ -152,10 +150,7 @@ public class Film {
 
 	@Override
 	public String toString() {
-		return "Film [id=" + id + ", title=" + title + ", description=" + description + ", releaseYear=" + releaseYear
-				+ ", laguageId=" + laguageId + ", rentalDuration=" + rentalDuration + ", rentalRate=" + rentalRate
-				+ ", length=" + length + ", replacementCost=" + replacementCost + ", rating=" + rating + ", features="
-				+ features + "]";
+		return "Film id: " + id + ", title: " + title + ", description: " + description;
 	}
 	
 	
