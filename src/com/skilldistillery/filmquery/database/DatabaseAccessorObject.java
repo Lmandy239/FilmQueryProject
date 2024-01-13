@@ -19,7 +19,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	public Film findFilmById(int filmId) throws SQLException {
 		Film film = null;
 
-		String sql = "SELECT * FROM film WHERE id = ?";
+		String sql = "SELECT film.*, language.id, language.name FROM film JOIN language ON film.language_id = language.id WHERE film.id = ?";
 		Connection conn = DriverManager.getConnection(URL, USER, PWD);
 
 		PreparedStatement stmt = conn.prepareStatement(sql);
@@ -29,12 +29,13 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		if (filmResult.next()) {
 			film = new Film(); // Create the object
 			// Here is our mapping of query columns to our object fields:
+//			System.out.println("******************");
 			film.setId(filmResult.getInt("id"));
 			film.setTitle(filmResult.getString("title"));
 			film.setReleaseYear(filmResult.getInt("release_year"));
 			film.setRating(filmResult.getString("rating"));
 			film.setDescription(filmResult.getString("description"));
-
+			film.setLanguage(filmResult.getString("language.name"));
 		}
 		// ...
 		filmResult.close();
@@ -76,7 +77,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 		List<Film> films = new ArrayList<>();
 
-		String sql = "SELECT * FROM film WHERE film.title LIKE ? OR film.description LIKE ?";
+		String sql = "SELECT film.*, language.id, language.name FROM film JOIN language ON film.language_id = language.id WHERE film.title LIKE ? OR film.description LIKE ?";
 		Connection conn = DriverManager.getConnection(URL, USER, PWD);
 
 		PreparedStatement stmt = conn.prepareStatement(sql);
@@ -93,7 +94,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			film.setReleaseYear(filmResult.getInt("release_year"));
 			film.setRating(filmResult.getString("rating"));
 			film.setDescription(filmResult.getString("description"));
-			
+			film.setLanguage(filmResult.getString("language.name"));
+
 			
 			films.add(film);
 

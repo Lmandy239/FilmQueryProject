@@ -36,20 +36,21 @@ public class FilmQueryApp {
 	private void startUserInterface(Scanner input) throws SQLException {
 		int choice;
 		System.out.println("\n" + "Hello what would you like to do?: ");
-		System.out.println("Choose your next move!");
 		System.out.println("1. Look up Film by Id");
 		System.out.println("2. Look up film by search keyword");
 		System.out.println("3. Exit Application");
 		System.out.println("Enter the number of your choice:");
 		choice = input.nextInt();
+		input.nextLine();
 
 		switch (choice) {
 		case 1:
 
 			System.out.println("Please enter film id:\n");
 			choice = input.nextInt();
+			input.nextLine();
 			Film film = db.findFilmById(choice);
-			System.out.println("Your film is:\n" + film + "\n");
+			System.out.println("Your film(s) is/are: " + film + "\n");
 			subMenu(input);
 			break;
 
@@ -58,8 +59,9 @@ public class FilmQueryApp {
 			String answer;
 			System.out.println("Please enter keyword: ");
 			answer = input.next();
+
 			List<Film> filmKeyword = db.findFilmByKeyword(answer);
-			System.out.println("Your film is: " + filmKeyword + "\n");
+			System.out.println("Your film(s) is/are: " + filmKeyword + "\n");
 			subMenu(input);
 			break;
 
@@ -82,6 +84,7 @@ public class FilmQueryApp {
 		System.out.println("1. Return to Main menu");
 		System.out.println("2. Display all details");
 		choice = input.nextInt();
+		input.nextLine();
 
 		switch (choice) {
 		case 1:
