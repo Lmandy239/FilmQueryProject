@@ -35,7 +35,7 @@ public class FilmQueryApp {
 
 	private void startUserInterface(Scanner input) throws SQLException {
 		int choice;
-		System.out.println("Hello what would you like to do?: ");
+		System.out.println("\n" + "Hello what would you like to do?: ");
 		System.out.println("Choose your next move!");
 		System.out.println("1. Look up Film by Id");
 		System.out.println("2. Look up film by search keyword");
@@ -49,32 +49,53 @@ public class FilmQueryApp {
 			System.out.println("Please enter film id:\n");
 			choice = input.nextInt();
 			Film film = db.findFilmById(choice);
-			System.out.println("Your film is:\n" + film);
-
+			System.out.println("Your film is:\n" + film + "\n");
+			subMenu(input);
 			break;
 
 		case 2:
-			
+
 			String answer;
 			System.out.println("Please enter keyword: ");
 			answer = input.next();
 			Film filmKeyword = db.findFilmByKeyword(answer);
-			System.out.println("Your film is: " + filmKeyword);
-			
+			System.out.println("Your film is: " + filmKeyword + "\n");
+			subMenu(input);
 			break;
-			
+
 		case 3:
-			
+
 			System.out.println("Goodbye!!!");
-			
+
 			break;
-			
+
 		default:
+			System.out.println("");
 			System.out.println("Wrong option going back to menu!\n");
 			startUserInterface(input);
 		}
 
-
 	}
 
+	public void subMenu(Scanner input) throws SQLException {
+		int choice;
+		System.out.println("1. Return to Main menu");
+		System.out.println("2. Display all details");
+		choice = input.nextInt();
+
+		switch (choice) {
+		case 1:
+			startUserInterface(input);
+			break;
+		case 2:
+			System.out.println("displaying info... beep beep");
+			break;
+		default:
+			System.out.println("");
+			System.out.println("Wrong option, try again\n");
+			subMenu(input);
+			;
+		}
+
+	}
 }
