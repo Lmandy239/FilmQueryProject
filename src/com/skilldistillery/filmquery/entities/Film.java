@@ -153,7 +153,10 @@ public class Film {
 		return "Film id: " + id + "\nTitle: " + title + "\nRelease year: " + releaseYear + "\nRated: " + rating + "\nDescription: " + description;
 	}
 	
-	
+	public String emptyToString() {
+		return "Film not found";
+		
+	}
 	
 	
 }

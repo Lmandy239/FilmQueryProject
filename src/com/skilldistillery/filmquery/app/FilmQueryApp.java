@@ -54,22 +54,26 @@ public class FilmQueryApp {
 			break;
 
 		case 2:
-			System.out.println("stub");
+			
+			String answer;
+			System.out.println("Please enter keyword: ");
+			answer = input.next();
+			Film filmKeyword = db.findFilmByKeyword(answer);
+			System.out.println("Your film is: " + filmKeyword);
+			
 			break;
+			
 		case 3:
+			
 			System.out.println("Goodbye!!!");
+			
 			break;
+			
 		default:
 			System.out.println("Wrong option going back to menu!\n");
 			startUserInterface(input);
 		}
-//		System.out.println("Please enter actor id:\n");
-//		choice = input.nextInt();
-//		Actor actor = db.findActorById(choice);
-//
-//		System.out.println("Your actor is:\n" + actor);
-//
-//		System.out.println("");
+
 
 	}
 
