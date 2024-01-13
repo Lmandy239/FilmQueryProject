@@ -20,9 +20,10 @@ public class FilmQueryApp {
 	}
 
 //  private void test() throws SQLException {
-//    Film film = db.findFilmById(48);
-//    System.out.println(film);
-//
+//    List<Actor> actor = db.findActorById(0);
+//   for (Actor actor2 : actor) {
+//	System.out.println(actor);
+//}
 //  }
 
 	private void launch() throws SQLException {
@@ -45,12 +46,18 @@ public class FilmQueryApp {
 
 		switch (choice) {
 		case 1:
-
 			System.out.println("Please enter film id:\n");
 			choice = input.nextInt();
 			input.nextLine();
 			Film film = db.findFilmById(choice);
-			System.out.println("Your film(s) is/are: " + film + "\n");
+			List<Actor> listActors = db.findListOfActorsByFilmId(choice);
+			if (film == null) {
+				System.out.println("No film found, please try again!");
+			} else {
+				System.out.println("Your film is: " + film + "\n");
+				System.out.println("Actors who worked in this move: ");
+				displayActors(listActors);
+			}
 			subMenu(input);
 			break;
 
@@ -61,7 +68,17 @@ public class FilmQueryApp {
 			answer = input.next();
 
 			List<Film> filmKeyword = db.findFilmByKeyword(answer);
-			System.out.println("Your film(s) is/are: " + filmKeyword + "\n");
+			List<Actor> listActors2 = db.findListOfActorsByFilmId(choice);
+
+			if (filmKeyword.isEmpty()) {
+				System.out.println("No films found, please try again!");
+			} else {
+				System.out.println("Your film(s) is/are: " + filmKeyword + "\n");
+				System.out.println("Actors who worked in this film: ");
+
+				displayActors(listActors2);
+
+			}
 			subMenu(input);
 			break;
 
@@ -75,6 +92,14 @@ public class FilmQueryApp {
 			System.out.println("");
 			System.out.println("Wrong option going back to menu!\n");
 			startUserInterface(input);
+		}
+
+	}
+
+	public void displayActors(List<Actor> actors) {
+
+		for (Actor actor : actors) {
+			System.out.println(actor);
 		}
 
 	}

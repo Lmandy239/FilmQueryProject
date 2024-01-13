@@ -27,49 +27,53 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 		ResultSet filmResult = stmt.executeQuery();
 		if (filmResult.next()) {
-			film = new Film(); // Create the object
-			// Here is our mapping of query columns to our object fields:
-//			System.out.println("******************");
+			film = new Film();
 			film.setId(filmResult.getInt("id"));
 			film.setTitle(filmResult.getString("title"));
 			film.setReleaseYear(filmResult.getInt("release_year"));
 			film.setRating(filmResult.getString("rating"));
 			film.setDescription(filmResult.getString("description"));
 			film.setLanguage(filmResult.getString("language.name"));
+
+			
 		}
-		// ...
+
 		filmResult.close();
 		stmt.close();
 		conn.close();
-		
+
 		return film;
 	}
 
-	public Actor findActorById(int actorId) throws SQLException {
-		Actor actor = null;
-		// ...
+	public List<Actor> findListOfActorsByFilmId(int filmId) throws SQLException {
+		List<Actor> actors = new ArrayList<>();
 
-		String sql = "SELECT * FROM actor WHERE id = ?";
+		String sql = "SELECT actor.*, film.*\n" + "FROM actor\n" + "JOIN film_actor fa ON actor.id = fa.actor_id\n"
+				+ "JOIN film ON film.id = fa.film_id WHERE film.id = ?";
 		Connection conn = DriverManager.getConnection(URL, USER, PWD);
 
 		PreparedStatement stmt = conn.prepareStatement(sql);
-		stmt.setInt(1, actorId);
+		stmt.setInt(1, filmId);
 
 		ResultSet actorResult = stmt.executeQuery();
-		if (actorResult.next()) {
-			actor = new Actor(); // Create the object
-			// Here is our mapping of query columns to our object fields:
+
+		while (actorResult.next()) {
+			Actor actor = new Actor();
+			actor = new Actor();
 			actor.setId(actorResult.getInt("id"));
 			actor.setFirstName(actorResult.getString("first_name"));
 			actor.setLastName(actorResult.getString("last_name"));
+
+			actors.add(actor);
+
 		}
 		// ...
 
 		actorResult.close();
 		stmt.close();
 		conn.close();
-		
-		return actor;
+
+		return actors;
 	}
 
 	@Override
@@ -85,10 +89,9 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		stmt.setString(2, "%" + filmKeyword + "%");
 
 		ResultSet filmResult = stmt.executeQuery();
-		
+
 		while (filmResult.next()) {
-			Film film = new Film(); // Create the object
-			// Here is our mapping of query columns to our object fields:
+			Film film = new Film();
 			film.setId(filmResult.getInt("id"));
 			film.setTitle(filmResult.getString("title"));
 			film.setReleaseYear(filmResult.getInt("release_year"));
@@ -96,7 +99,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			film.setDescription(filmResult.getString("description"));
 			film.setLanguage(filmResult.getString("language.name"));
 
-			
 			films.add(film);
 
 		}
