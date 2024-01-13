@@ -30,34 +30,36 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			// Here is our mapping of query columns to our object fields:
 			film.setId(filmResult.getInt("id"));
 			film.setTitle(filmResult.getString("title"));
+			film.setReleaseYear(filmResult.getInt("release_year"));
+			film.setRating(filmResult.getString("rating"));
 			film.setDescription(filmResult.getString("description"));
 		
-		}
+		} 
 		// ...
 		return film;
 	}
 
-	public Actor findActorById(int actorId) throws SQLException {
-		Actor actor = null;
-		// ...
-
-		String sql = "SELECT * FROM actor WHERE id = ?";
-		Connection conn = DriverManager.getConnection(URL, USER, PWD);
-
-		PreparedStatement stmt = conn.prepareStatement(sql);
-		stmt.setInt(1, actorId);
-
-		ResultSet actorResult = stmt.executeQuery();
-		if (actorResult.next()) {
-			actor = new Actor(); // Create the object
-			// Here is our mapping of query columns to our object fields:
-			actor.setId(actorResult.getInt("id"));
-			actor.setFirstName(actorResult.getString("first_name"));
-			actor.setLastName(actorResult.getString("last_name"));
-		}
-		// ...
-		return actor;
-	}
+//	public Actor findActorById(int actorId) throws SQLException {
+//		Actor actor = null;
+//		// ...
+//
+//		String sql = "SELECT * FROM actor WHERE id = ?";
+//		Connection conn = DriverManager.getConnection(URL, USER, PWD);
+//
+//		PreparedStatement stmt = conn.prepareStatement(sql);
+//		stmt.setInt(1, actorId);
+//
+//		ResultSet actorResult = stmt.executeQuery();
+//		if (actorResult.next()) {
+//			actor = new Actor(); // Create the object
+//			// Here is our mapping of query columns to our object fields:
+//			actor.setId(actorResult.getInt("id"));
+//			actor.setFirstName(actorResult.getString("first_name"));
+//			actor.setLastName(actorResult.getString("last_name"));
+//		}
+//		// ...
+//		return actor;
+//	}
 
 
 

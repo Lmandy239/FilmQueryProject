@@ -27,9 +27,9 @@ public class FilmQueryApp {
 
 	private void launch() throws SQLException {
 		Scanner input = new Scanner(System.in);
-		
+
 		startUserInterface(input);
-		
+
 		input.close();
 	}
 
@@ -42,14 +42,17 @@ public class FilmQueryApp {
 		System.out.println("3. Exit Application");
 		System.out.println("Enter the number of your choice:");
 		choice = input.nextInt();
-		
-		switch(choice){
-		case 1:			
+
+		switch (choice) {
+		case 1:
+
 			System.out.println("Please enter film id:\n");
 			choice = input.nextInt();
 			Film film = db.findFilmById(choice);
 			System.out.println("Your film is:\n" + film);
+
 			break;
+
 		case 2:
 			System.out.println("stub");
 			break;
@@ -68,9 +71,6 @@ public class FilmQueryApp {
 //
 //		System.out.println("");
 
-
 	}
-	
-	
 
 }
