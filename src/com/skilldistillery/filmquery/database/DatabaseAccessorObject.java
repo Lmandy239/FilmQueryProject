@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.skilldistillery.filmquery.entities.Actor;
@@ -17,7 +18,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 	public Film findFilmById(int filmId) throws SQLException {
 		Film film = null;
-		
+
 		String sql = "SELECT * FROM film WHERE id = ?";
 		Connection conn = DriverManager.getConnection(URL, USER, PWD);
 
@@ -33,9 +34,13 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			film.setReleaseYear(filmResult.getInt("release_year"));
 			film.setRating(filmResult.getString("rating"));
 			film.setDescription(filmResult.getString("description"));
-		
-		} 
+
+		}
 		// ...
+		filmResult.close();
+		stmt.close();
+		conn.close();
+		
 		return film;
 	}
 
@@ -58,14 +63,19 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			actor.setLastName(actorResult.getString("last_name"));
 		}
 		// ...
+
+		actorResult.close();
+		stmt.close();
+		conn.close();
+		
 		return actor;
 	}
 
 	@Override
-	public Film findFilmByKeyword(String filmKeyword) throws SQLException {
-		
-		Film film = null;
-		
+	public List<Film> findFilmByKeyword(String filmKeyword) throws SQLException {
+
+		List<Film> films = new ArrayList<>();
+
 		String sql = "SELECT * FROM film WHERE film.title LIKE ? OR film.description LIKE ?";
 		Connection conn = DriverManager.getConnection(URL, USER, PWD);
 
@@ -75,22 +85,25 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 		ResultSet filmResult = stmt.executeQuery();
 		
-		
-		
-		if (filmResult.next()) {
-			film = new Film(); // Create the object
+		while (filmResult.next()) {
+			Film film = new Film(); // Create the object
 			// Here is our mapping of query columns to our object fields:
 			film.setId(filmResult.getInt("id"));
 			film.setTitle(filmResult.getString("title"));
 			film.setReleaseYear(filmResult.getInt("release_year"));
 			film.setRating(filmResult.getString("rating"));
 			film.setDescription(filmResult.getString("description"));
-		
-		} 
-		
-		
-		
-		return film;
+			
+			
+			films.add(film);
+
+		}
+
+		filmResult.close();
+		stmt.close();
+		conn.close();
+
+		return films;
 	}
 
 //
@@ -99,8 +112,5 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
-
-
-
 
 }

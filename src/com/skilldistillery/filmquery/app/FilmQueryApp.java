@@ -58,7 +58,7 @@ public class FilmQueryApp {
 			String answer;
 			System.out.println("Please enter keyword: ");
 			answer = input.next();
-			Film filmKeyword = db.findFilmByKeyword(answer);
+			List<Film> filmKeyword = db.findFilmByKeyword(answer);
 			System.out.println("Your film is: " + filmKeyword + "\n");
 			subMenu(input);
 			break;
