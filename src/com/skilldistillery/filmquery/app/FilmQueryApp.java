@@ -74,7 +74,7 @@ public class FilmQueryApp {
 				System.out.println("No films found, please try again!");
 			} else {
 				System.out.println("Your film(s) is/are: " + filmKeyword + "\n");
-				System.out.println("Actors who worked in these films: ");
+				System.out.println("Actors who worked in this/these film(s): ");
 
 				displayActors(listActors2);
 

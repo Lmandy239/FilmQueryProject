@@ -5,17 +5,22 @@ Project using databases and java. It is a text based application that retrieves 
 
 Instructions: 
 
-1- Run the program as a Java application or compile it using the javac command from the terminal and then execute it. 
+1- Run the program as a Java application or compile it using the `javac`  command from the terminal and then execute it. 
 
 2- Once the program opens:
 
--The user is presented with a menu in which they can choose to:
+The user is presented with a menu in which they can choose to:
 
 -Look up a film by its id.
+
 -Look up a film by a search keyword.
+
 -Exit the application.
 
 -Simply choose as desired and follow the instructions, invalid answers will return the user to the main menu. 
+
+
+** NOTE: The second option within the sub menu, to display additional info is a stub, selecting this option will lead to termination of the program. 
 
 # Tech used
 Java
