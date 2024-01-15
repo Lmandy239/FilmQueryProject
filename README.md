@@ -20,7 +20,7 @@ The user is presented with a menu in which they can choose to:
 -Simply choose as desired and follow the instructions, invalid answers will return the user to the main menu. 
 
 
-** NOTE: The second option within the sub menu, to display additional info is a stub, selecting this option will lead to termination of the program. 
+** NOTE: The second option within the sub menu, to display additional info, is a stub; selecting this option will lead to termination of the program. 
 
 # Tech used
 Java
@@ -31,6 +31,8 @@ JDBC (Java Database Connectivity)
 
 # Lessons Learned
 
-It is very hard to translate query data into the methods, sometimes it will result in errors that at first seem to be due to typos in mysql; however it usually is an invalid prompt within the result sets. 
-I spent a lot of the project plugging in data, and playing with the methods. Sometimes my methods simply had too much going on which led, to the creation of other methods. For example, at first I tried to produce the list of actors from each movie within the respective film search methods. This would work if I printed the list within those methods, but the idea was to only print stuff as debugging and keep all the interface interaction within main. 
-Overall, I feel like this project challenged me in more ways that one. I'm looking forward to expanding upon this subject, some extra practice would also help.
+It is very hard to translate query data into the methods; sometimes it will result in errors that at first seem to be due to typos in MySQL; however, it is usually an invalid prompt within the result sets.
+
+I spent a lot of the project plugging in data and playing with the methods. Sometimes my methods simply had too much going on, which led to the creation of other methods. For example, at first I tried to produce the list of actors from each movie within the respective film search methods. This would work if I printed the list within those methods, but the idea was to only print stuff in the DBO as debugging statements, and keep all the interface interaction within main.
+
+Overall, I feel like this project challenged me in more ways than one. I'm looking forward to expanding upon this subject; some extra practice would also help.
