@@ -68,13 +68,13 @@ public class FilmQueryApp {
 			answer = input.next();
 
 			List<Film> filmKeyword = db.findFilmByKeyword(answer);
-			List<Actor> listActors2 = db.findListOfActorsByFilmId(choice);
+			List<Actor> listActors2 = db.findListOfActorsByFilmKeyword(answer);
 
 			if (filmKeyword.isEmpty()) {
 				System.out.println("No films found, please try again!");
 			} else {
 				System.out.println("Your film(s) is/are: " + filmKeyword + "\n");
-				System.out.println("Actors who worked in this film: ");
+				System.out.println("Actors who worked in these films: ");
 
 				displayActors(listActors2);
 
@@ -103,6 +103,8 @@ public class FilmQueryApp {
 		}
 
 	}
+
+		
 
 	public void subMenu(Scanner input) throws SQLException {
 		int choice;
